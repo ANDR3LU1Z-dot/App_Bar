@@ -42,12 +42,15 @@
         android:background="@color/teal_700"
         android:minHeight="?attr/actionBarSize"
         android:theme="?attr/actionBarTheme"
+        app:popupTheme="@style/AppTheme.PopupOverlay"
+        app:contentInsetStart="0dp"
+        app:contentInsetStartWithNavigation="0dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:logo="@drawable/ic_logo"
-        app:subtitle="Segunda Activity"
+        app:menu="@menu/second_screen_menu"
         app:title="Segunda Tela"
-        app:titleMarginStart="15dp" />
+        app:titleMarginStart="8dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

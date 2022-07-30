@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">App Bar</string>
+    <string name="menu_save_title">Salvar</string>
+    <string name="menu_settings_title">Configurações</string>
 </resources>
