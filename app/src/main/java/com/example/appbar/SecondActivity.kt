@@ -3,26 +3,68 @@ package com.example.appbar
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.Gravity
 import android.view.Menu
 import android.view.MenuItem
+import androidx.core.view.GravityCompat
+import androidx.drawerlayout.widget.DrawerLayout
 import com.example.appbar.databinding.ActivityMainBinding
 import com.example.appbar.databinding.ActivitySecondBinding
+import com.google.android.material.navigation.NavigationView
 import com.google.android.material.snackbar.Snackbar
 
 class SecondActivity : AppCompatActivity() {
     private lateinit var binding: ActivitySecondBinding
+    lateinit var drawer: DrawerLayout
+    lateinit var navDrawer: NavigationView
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
         binding = ActivitySecondBinding.inflate(layoutInflater)
         val toolbar2 = binding.toolbar
+
         setContentView(binding.root)
         setSupportActionBar(toolbar2)
 
+        setupToolbar()
+
+        drawer = binding.root
+        navDrawer = binding.navView
+
+
+
+        backtoFirstActivity()
+        setupDrawer()
+
+    }
+
+    private fun setupDrawer(){
+        navDrawer.setNavigationItemSelectedListener { menuItem ->
+            drawer.closeDrawers()
+            when(menuItem.itemId){
+                R.id.drawer_home -> {
+                    onBackPressed()
+                    true
+                }
+
+                else -> false
+            }
+
+        }
+    }
+
+    private fun setupToolbar(){
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        supportActionBar?.setHomeAsUpIndicator(R.drawable.ic_menu)
+    }
 
+    override fun onSupportNavigateUp(): Boolean {
+        drawer.openDrawer(GravityCompat.START)
+        return true
+    }
 
+    private fun backtoFirstActivity(){
         val buttonSecondActivity = binding.btnBacktoMain
-
         buttonSecondActivity.setOnClickListener {
             startActivity(Intent(this, MainActivity::class.java))
             finish()
