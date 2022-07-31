@@ -10,6 +10,7 @@ import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import com.example.appbar.databinding.ActivityMainBinding
 import com.example.appbar.databinding.ActivitySecondBinding
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.navigation.NavigationView
 import com.google.android.material.snackbar.Snackbar
 
@@ -17,6 +18,7 @@ class SecondActivity : AppCompatActivity() {
     private lateinit var binding: ActivitySecondBinding
     lateinit var drawer: DrawerLayout
     lateinit var navDrawer: NavigationView
+    lateinit var bottomNav: BottomNavigationView
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -30,12 +32,30 @@ class SecondActivity : AppCompatActivity() {
 
         drawer = binding.root
         navDrawer = binding.navView
+        bottomNav = binding.bottomNav
 
 
 
         backtoFirstActivity()
         setupDrawer()
+        setupBottomNavigation()
 
+    }
+
+    private fun setupBottomNavigation(){
+        bottomNav.setOnItemSelectedListener { menuItem ->
+            when(menuItem.itemId){
+                R.id.bottom_option_1 -> {
+                    Snackbar.make(drawer,getString(R.string.bottom_nav_title_1), Snackbar.LENGTH_SHORT).show()
+                    true
+                }
+                R.id.bottom_option_2 -> {
+                    Snackbar.make(drawer,getString(R.string.bottom_nav_title_2), Snackbar.LENGTH_SHORT).show()
+                    true
+                }
+                else -> false
+            }
+        }
     }
 
     private fun setupDrawer(){
